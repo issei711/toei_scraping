@@ -7,7 +7,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from flask import Flask, jsonify, render_template
 from app.scraper import toei_scraping_main
 
-app = Flask(__name__, template_folder="app/templates")  # ✅ テンプレートフォルダを明示
+app = Flask(__name__, template_folder="app/templates", static_folder="app/static")  # ✅ テンプレートフォルダを明示
 
 @app.route('/')
 def home():
