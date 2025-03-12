@@ -7,7 +7,7 @@ from config import Config  # Flask の `config.py` をインポート
 
 # Google API 認証設定
 SCOPE = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-CREDENTIALS = ServiceAccountCredentials.from_json_keyfile_name(Config.GOOGLE_CREDENTIALS, SCOPE)
+CREDENTIALS = ServiceAccountCredentials.from_json_keyfile_dict(Config.GOOGLE_CREDENTIALS, SCOPE)
 GC = gspread.authorize(CREDENTIALS)
 WORKSHEET = GC.open_by_key(Config.SPREADSHEET_KEY).worksheet('テスト')
 

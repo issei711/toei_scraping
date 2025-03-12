@@ -1,20 +1,23 @@
 import os
 import json
+import base64
 from dotenv import load_dotenv
 
 # 環境変数を読み込む
 load_dotenv()
 
 class Config:
-    BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-    SPREADSHEET_KEY = os.getenv("SPREADSHEET_KEY")  # 環境変数から取得
+    SPREADSHEET_KEY = os.getenv("SPREADSHEET_KEY")
 
-    # Google API 認証情報を環境変数から取得
+    # `GOOGLE_CREDENTIALS_JSON` を取得
     GOOGLE_CREDENTIALS_JSON = os.getenv("GOOGLE_CREDENTIALS_JSON")
 
-    if GOOGLE_CREDENTIALS_JSON:
-        GOOGLE_CREDENTIALS = os.path.join(BASE_DIR, "config.json")
-        with open(GOOGLE_CREDENTIALS, "w") as f:
-            json.dump(json.loads(GOOGLE_CREDENTIALS_JSON), f)
-    else:
+    if not GOOGLE_CREDENTIALS_JSON:
         raise ValueError("環境変数 GOOGLE_CREDENTIALS_JSON が設定されていません。")
+
+    try:
+        # ✅ `base64` からデコードして JSON に戻す
+        json_str = base64.b64decode(GOOGLE_CREDENTIALS_JSON).decode('utf-8')
+        GOOGLE_CREDENTIALS = json.loads(json_str)
+    except Exception as e:
+        raise ValueError(f"GOOGLE_CREDENTIALS_JSON のデコードに失敗しました: {e}")
