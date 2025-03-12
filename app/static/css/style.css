@@ -1,0 +1,49 @@
+/* 共通スタイル */
+body {
+    background-color: #f8f9fa;
+    text-align: center;
+    padding-top: 15%;
+}
+
+.container {
+    max-width: 600px;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ヘッダー */
+h1 {
+    color: #343a40;
+    font-weight: bold;
+}
+
+/* ボタン共通 */
+.btn-custom {
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+    transition: 0.3s;
+}
+
+/* 戻るボタン（青色） */
+.btn-back {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-back:hover {
+    background-color: #0056b3;
+}
+
+/* スクレイピング開始ボタン（緑色） */
+.btn-start {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-start:hover {
+    background-color: #218838;
+}
