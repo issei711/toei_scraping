@@ -1,0 +1,13 @@
+services:
+  flask_app:
+    platform: linux/arm64  # ✅ `build` ではなく `services` に移動
+    build: .
+    working_dir: /app
+    ports:
+      - "8080:5000"
+    volumes:
+      - .:/app
+    environment:
+      - FLASK_APP=run.py
+      - FLASK_ENV=development
+    command: gunicorn -b 0.0.0.0:5000 --timeout 300 --workers 2 --worker-class gevent run:app
