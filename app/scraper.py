@@ -9,7 +9,7 @@ from config import Config  # Flask の `config.py` をインポート
 SCOPE = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
 CREDENTIALS = ServiceAccountCredentials.from_json_keyfile_dict(Config.GOOGLE_CREDENTIALS, SCOPE)
 GC = gspread.authorize(CREDENTIALS)
-WORKSHEET = GC.open_by_key(Config.SPREADSHEET_KEY).worksheet('テスト')
+WORKSHEET = GC.open_by_key(Config.SPREADSHEET_KEY).worksheet('新規案件URL貼り付け')
 
 # ユーザーエージェントリスト
 USER_AGENTS = [
