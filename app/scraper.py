@@ -48,7 +48,7 @@ def toei_scraping_main():
         url_last_row = len(WORKSHEET.col_values(2))
         print(f"Last row in spreadsheet: {url_last_row}")  # ✅ デバッグログ追加
         # start_row = int(WORKSHEET.acell('A1').value) + 1
-        start_row = 275
+        start_row = int(WORKSHEET.acell('A1').value) + 1
         end_row = url_last_row
         urls = [row[0] for row in WORKSHEET.get(f"B{start_row}:B{end_row}") if row]
 
