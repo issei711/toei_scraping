@@ -5,12 +5,6 @@ from oauth2client.service_account import ServiceAccountCredentials
 import gspread
 from config import Config  # Flask の `config.py` をインポート
 
-# Google API 認証設定
-SCOPE = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-CREDENTIALS = ServiceAccountCredentials.from_json_keyfile_dict(Config.GOOGLE_CREDENTIALS, SCOPE)
-GC = gspread.authorize(CREDENTIALS)
-WORKSHEET = GC.open_by_key(Config.SPREADSHEET_KEY).worksheet('新規案件URL貼り付け')
-
 # ユーザーエージェントリスト
 USER_AGENTS = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
@@ -42,6 +36,13 @@ def get_list_elements(soup, xpaths):
 # スクレイピング処理
 def toei_scraping_main():
     print("Starting scraping process...")  # ✅ デバッグログ追加
+
+    # Google API 認証設定
+    SCOPE = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+    CREDENTIALS = ServiceAccountCredentials.from_json_keyfile_dict(Config.GOOGLE_CREDENTIALS, SCOPE)
+    GC = gspread.authorize(CREDENTIALS)
+    WORKSHEET = GC.open_by_key(Config.SPREADSHEET_KEY).worksheet('新規案件URL貼り付け')
+
     try:
         # 最終行の取得
         url_last_row = len(WORKSHEET.col_values(2))

@@ -8,9 +8,10 @@ load_dotenv()
 
 class Config:
     SPREADSHEET_KEY = os.getenv("SPREADSHEET_KEY")
-
-    # `GOOGLE_CREDENTIALS_JSON` を取得
     GOOGLE_CREDENTIALS_JSON = os.getenv("GOOGLE_CREDENTIALS_JSON")
+
+    print("GOOGLE_CREDENTIALS_JSON:", os.getenv("GOOGLE_CREDENTIALS_JSON")[:30])
+    print("SPREADSHEET_KEY:", os.getenv("SPREADSHEET_KEY"))
 
     if not GOOGLE_CREDENTIALS_JSON:
         raise ValueError("環境変数 GOOGLE_CREDENTIALS_JSON が設定されていません。")
